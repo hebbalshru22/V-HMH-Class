@@ -12,7 +12,6 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class WebDriverUtility {
-    public static Properties prop;
 
     public static void visibilityOfElemnt(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));

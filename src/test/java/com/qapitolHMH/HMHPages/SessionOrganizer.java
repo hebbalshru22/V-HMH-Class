@@ -1,13 +1,19 @@
 package com.qapitolHMH.HMHPages;
+import com.qapitolHMH.Utility.AssertionUtils;
+import com.qapitolHMH.Utility.BrokenLinksUtility;
+import com.qapitolHMH.Utility.ReadPropertyfile;
 import com.qapitolHMH.Utility.WebDriverUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
+
 public class SessionOrganizer {
     WebDriver driver;
-    WebDriverUtility webDriverUtility;
+    BrokenLinksUtility broken;
+
 
     public SessionOrganizer(WebDriver driver) {
         this.driver = driver;
@@ -57,14 +63,36 @@ public class SessionOrganizer {
     WebElement lesson;
 
 
-    public void SessionOrganizerMethod()
-    {
+    public void SessionOrganizerMethod() throws IOException {
         myclass.click();
+        String expectedURL = "https://cert.hmhco.com/ui/#/my-classes";
+        AssertionUtils.assertCurrentURL(driver, expectedURL, "The current URL doesn't match the expected URL");
+
+        //Broken links
+        broken= new BrokenLinksUtility(driver);
+        String url = ReadPropertyfile.getObject("brokenlinksMyclass") ;
+        broken.checkBrokenLinks(url);
+
         WebDriverUtility.scrollToElement(driver,viewclass);
         WebDriverUtility.clickElementUsingJavaScript(driver, viewclass);
         WebDriverUtility.elementToBeClickable(driver,viewmore,30);
         WebDriverUtility.scrollToElement(driver,upcomingsession);
         viewmore.click();
+
+        //Wait for title
+        WebDriverUtility.waitForTitle(driver,60, "Session Organizer");
+
+
+        //Assertion for title
+        String expectedTitle = "Session Organizer - HMH Ed";
+        AssertionUtils.assertPageTitle(driver, expectedTitle, "Page title doesn't match expected title");
+
+        //Broken links
+        broken= new BrokenLinksUtility(driver);
+        String urlToCheck1 = ReadPropertyfile.getObject("brokenSessionorganizer") ;
+        broken.checkBrokenLinks(urlToCheck1);
+
+        WebDriverUtility.elementToBeClickable(driver,modules,30);
         modules.click();
         WebDriverUtility.scrollToElement(driver,lesson);
         selectmodule.click();
@@ -83,8 +111,6 @@ public class SessionOrganizer {
             markasdone.click();
         }
      }
-
-
 }
 
 

@@ -1,6 +1,8 @@
 package com.qapitolHMH.HMHPages;
 
 import com.qapitolHMH.HMHBase.BaseClass;
+import com.qapitolHMH.Utility.AssertionUtils;
+import com.qapitolHMH.Utility.BrokenLinksUtility;
 import com.qapitolHMH.Utility.ReadPropertyfile;
 import com.qapitolHMH.Utility.WebDriverUtility;
 import org.openqa.selenium.By;
@@ -8,17 +10,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import java.io.IOException;
 import java.util.Properties;
 
 public class LoginPage extends BaseClass {
 
     WebDriver driver;
-    WebDriverUtility webDriverUtility;
     public static Properties prop;
-
-
+    BrokenLinksUtility broken;
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
@@ -63,6 +62,7 @@ public class LoginPage extends BaseClass {
 
     public void logincountry(String country,String state,String district) throws InterruptedException, IOException
     {
+
         //Country selection
         WebDriverUtility.elementToBeClickable(driver,countryDropdown,10);
         countryDropdown.click();
@@ -91,11 +91,16 @@ public class LoginPage extends BaseClass {
         signin.click();
 
         //Wait for title
-        WebDriverUtility.waitForTitle(driver,10, "Dashboard");
+        WebDriverUtility.waitForTitle(driver,60, "Dashboard");
 
-        //Assertion
-        String expected="Dashboard - HMH Ed";
-        String actusal=driver.getTitle();
-        Assert.assertEquals(expected,actusal);
+        //Broken links
+        broken= new BrokenLinksUtility(driver);
+        String urlToCheck =ReadPropertyfile.getObject("brokLogin") ;
+        broken.checkBrokenLinks(urlToCheck);
+
+        //Assertion for title
+        String expectedTitle = "Dashboard - HMH Ed";
+        AssertionUtils.assertPageTitle(driver, expectedTitle, "Page title doesn't match expected title");
+
     }
 }

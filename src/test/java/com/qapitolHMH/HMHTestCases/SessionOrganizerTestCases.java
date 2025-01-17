@@ -8,14 +8,12 @@ import com.qapitolHMH.Utility.ReadPropertyfile;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
 import java.io.IOException;
-@Listeners(com.qapitolHMH.Utility.ListenerImplementation.class)
 
-public class SessionOrganizerTestCases extends BaseClass
-{
+@Listeners(com.qapitolHMH.Utility.ListenerImplementation.class)
+public class SessionOrganizerTestCases extends BaseClass {
     @Test
-    public void LoginFunction() throws InterruptedException, IOException {
+    public void LoginFunction() {
         try {
             LoginPage lp = new LoginPage(driver);
             lp.logincountry(ReadPropertyfile.getObject("country"),
@@ -27,7 +25,7 @@ public class SessionOrganizerTestCases extends BaseClass
     }
 
     @Test(dependsOnMethods = "LoginFunction")
-    public void SessionOrganizer()  {
+    public void SessionOrganizer() throws IOException {
         SessionOrganizer mc = new SessionOrganizer(driver);
         mc.SessionOrganizerMethod();
     }

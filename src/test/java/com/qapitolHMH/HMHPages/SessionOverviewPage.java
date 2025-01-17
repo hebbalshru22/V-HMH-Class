@@ -9,9 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SessionOverviewPage {
     WebDriver driver;
-    WebDriverUtility webDriverUtility;
-
-    public SessionOverviewPage(WebDriver driver) {
+        public SessionOverviewPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
@@ -31,10 +29,10 @@ public class SessionOverviewPage {
     @FindBy(xpath = "//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall mui-1n2hj9v\"]")
     WebElement closestd;
 
-    @FindBy(xpath="//button[text()=\"Exit\"]")
+    @FindBy(xpath="//button[text()='Exit']")
     WebElement exitPreview;
 
-    @FindBy(xpath="//button[@data-testid=\"byt-button\"]")
+    @FindBy(xpath="//button[@data-testid='byt-button']")
     WebElement viewBeforeTeach;
 
     @FindBy(xpath="//*[text()=\"clicking this link.\"]")

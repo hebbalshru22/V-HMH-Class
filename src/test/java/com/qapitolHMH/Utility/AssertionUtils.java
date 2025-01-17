@@ -1,12 +1,9 @@
 package com.qapitolHMH.Utility;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class AssertionUtils {
-
-
 
     // Assert if the URL of the current page matches the expected URL
     public static void assertCurrentURL(WebDriver driver, String expectedURL, String errorMessage) {

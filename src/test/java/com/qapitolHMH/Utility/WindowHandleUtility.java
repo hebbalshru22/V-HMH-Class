@@ -1,7 +1,6 @@
 package com.qapitolHMH.Utility;
 
 import org.openqa.selenium.WebDriver;
-
 import java.util.Set;
 
 public class WindowHandleUtility {

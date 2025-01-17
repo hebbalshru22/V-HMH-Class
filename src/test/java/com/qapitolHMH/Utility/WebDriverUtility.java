@@ -7,13 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.Properties;
 
 public class WebDriverUtility {
 
-    public static void visibilityOfElemnt(WebDriver driver, WebElement element) {
+    public static void visibilityOfElement(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
@@ -32,7 +30,7 @@ public class WebDriverUtility {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
         wait.until(ExpectedConditions.titleContains(partialTitle));
     }
-    public static void scrollToElement(WebDriver driver, org.openqa.selenium.WebElement element) {
+    public static void scrollToElement(WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }

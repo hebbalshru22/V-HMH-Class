@@ -7,7 +7,6 @@ import com.qapitolHMH.HMHPages.SessionOverviewPage;
 import com.qapitolHMH.Utility.ReadPropertyfile;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import java.io.IOException;
 
 @Listeners(com.qapitolHMH.Utility.ListenerImplementation.class)
